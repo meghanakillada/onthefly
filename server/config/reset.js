@@ -5,7 +5,7 @@ import path, { dirname } from 'path'
 import fs from 'fs'
 
 const currentPath = fileURLToPath(import.meta.url)
-const tripsFile = fs.readFileSync(path.join(dirname(currentPath), '../config/data/data.json'))
+const tripsFile = fs.readFileSync(path.join(dirname(currentPath), './data/data.json'))
 const tripsData = JSON.parse(tripsFile)
 
 const createTripsTable = async () => {
@@ -149,11 +149,12 @@ const createTripsUsersTable = async () => {
         const res = await pool.query(createTripsUsersTableQuery)
         console.log('🎉 trips_users table created successfully')
     }
-    catch (error) {
+    catch (err) {
         console.error('⚠️ error creating trips_users table', err)
     }
 }
 
+createTripsTable()
 seedTripsTable()
 createDestinationsTable()
 createActivitiesTable()
